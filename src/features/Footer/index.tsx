@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 export interface FooterProps { };
 
 export interface FooterState { };
