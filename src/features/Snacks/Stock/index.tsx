@@ -9,14 +9,9 @@ export interface StockProps {
 };
 
 class Stock extends React.Component<StockProps, {}> {
-    constructor(props: StockProps) {
-        super(props);
-        this.state = {};
-    }
-
     snackClickHandler = () => {
-        // TODO: Maybe add a detail view here or something?
-        console.log('@@@@@@@@@@@@@@@@ Stock component snackClickHandler firing');
+        // TODO: Add a detail modal component here that displays the description coming
+        // back from snacks in the service.
     };
 
     renderSnackCardGrid = (): JSX.Element => {
@@ -39,15 +34,15 @@ class Stock extends React.Component<StockProps, {}> {
 
     renderEmptyState = (): JSX.Element => {
         return (
-            <div>
-                EMPTY STATE
-            </div>
+            <SnacksStyles.SectionEmptyState>
+                Uh oh! Looks like we're having some trouble getting the current snack list. Please try back again later!
+            </SnacksStyles.SectionEmptyState>
         );
     };
 
     render() {
         return (
-            <SnacksStyles.SectionContainer backgroundImg={stockBGImg}>
+            <SnacksStyles.SectionContainer id={'stock-component'} backgroundImg={stockBGImg}>
                 <S.Content>
                     <SnacksStyles.SectionHeaderContainer>
                         <SnacksStyles.SectionHeader>Currently In Stock</SnacksStyles.SectionHeader>

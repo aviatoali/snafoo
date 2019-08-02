@@ -6,9 +6,6 @@ export interface SnackCardProps {
     onSnackClick: () => void;
 };
 
-// TODO: What if image is unavailable? Should I even check for that case?
-// TODO: Add cool hover state for this
-
 class SnackCard extends React.Component<SnackCardProps, {}> {
     constructor(props: SnackCardProps) {
         super(props);

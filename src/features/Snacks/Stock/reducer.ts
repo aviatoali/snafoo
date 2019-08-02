@@ -20,7 +20,7 @@ const stockListReducer: Reducer<StockListState> = (state: StockListState = initi
             const list = unsortedList.sort((a, b) => { return b.votes - a.votes });
             return { ...state, list };
         case GET_SNACKS_FAILURE:
-            // TODO: Add some error handling here, show that error pop-up
+            // TODO: Replace the error message in the subheader with a modal if there is spare time
             const actionGetSnacksFailure = action as GetSnacksFailureAction;
             const error = actionGetSnacksFailure.error;
             return state;

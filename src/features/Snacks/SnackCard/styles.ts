@@ -28,6 +28,13 @@ export const ImageContainer = styled.div`
     @media (min-width: 401px) {
         box-shadow: 5px 5px 4px #626262cc;
     };
+    transition: all 300ms;
+    &:hover {
+        border-color: #3d8b9f;
+    };
+    &:active {
+        box-shadow: 3px 3px 2px #626262cc;
+    };
 `;
 
 export const Triangle = styled.div`

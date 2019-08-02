@@ -1,22 +1,9 @@
 import React from 'react';
 
-export interface HomeProps { };
-
-export interface HomeState { };
-
-class Home extends React.Component<HomeProps, HomeState> {
-    constructor(props: HomeProps) {
-        super(props);
-        this.state = {}
-    }
-
-    onVoteClick = () => {
-        console.log('@@@@@@@@@@@@@@@@@ onClick firing');
-    }
-
+class Home extends React.Component<{}, {}> {
     render() {
         return (
-            <div className="site-bd-section">
+            <div className="site-bd-section" id="home-component">
                 <div className="heroBanner">
                     <div className="heroBanner-content u-constrainer">
                         <div className="heroBanner-content-hd">
@@ -32,7 +19,7 @@ class Home extends React.Component<HomeProps, HomeState> {
                         <div className="heroBanner-content-ft">
                             <button
                                 className="btn"
-                                onClick={this.onVoteClick}
+                                onClick={() => window.location.href = '#voting-component'}
                             >
                                 Vote Now
                             </button>

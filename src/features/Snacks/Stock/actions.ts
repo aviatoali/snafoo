@@ -1,10 +1,6 @@
 import { Action } from 'redux';
 import * as Actions from './actionTypes';
 
-// TODO: Fill out all of these, and create type models for response data to assign to action
-// data for each:
-
-// get snacks
 export interface GetSnacksAction extends Action {};
 
 export interface GetSnacksSuccessAction extends Action {

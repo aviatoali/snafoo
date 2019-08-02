@@ -45,7 +45,6 @@ export const ItemCountCircle = styled.div`
         display: table-cell;
     };
 `;
-// TODO: Add onhover effect
 
 export const PlusIcon = styled.svg`
     height: 20px;
@@ -109,6 +108,15 @@ export const VotingOptionsTableData = styled(SelectionTableData)`
     ${(props: VotingOptionsTableRowProps) => props.isEven != null && `
         background-color: ${props.isEven ? '#c5c5c5' : '#cfcfcf'};
     `};
+`;
+
+export const PlusIconTableData = styled(VotingOptionsTableData)`
+    &:hover {
+        background-color: ${(props:VotingOptionsTableRowProps) => props.isEven != null && props.isEven ? '#e1e1e1' : '#d6d6d6' };
+        polygon:nth-child(n) {
+            fill: ${(props:VotingOptionsTableRowProps) => props.isEven != null && props.isEven ? '#cfcfcf' : '#c5c5c5' };
+        };
+    };
 `;
 
 export const VotingOptionsTableRow = styled.tr`

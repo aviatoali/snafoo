@@ -1,15 +1,6 @@
 import React from 'react';
 
-export interface LogoIconLayoutProps { };
-
-export interface LogoIconLayoutState { };
-
-class LogoIconLayout extends React.Component<LogoIconLayoutProps, LogoIconLayoutState> {
-    constructor(props: LogoIconLayoutProps) {
-        super(props);
-        this.state = {}
-    }
-
+class LogoIconLayout extends React.Component<{}, {}> {
     render() {
         return (
             <div className="u-isHidden">
