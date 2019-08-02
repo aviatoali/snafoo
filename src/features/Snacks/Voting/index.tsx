@@ -16,7 +16,15 @@ class Voting extends React.Component<VotingProps, {}> {
         this.state = {};
     }
 
-    renderVoteSection = (): JSX.Element => {
+    onVoteClick = (snack: Snack, votesRemaining: number) => {
+        if (votesRemaining > 0) {
+            this.props.onVoteClick(snack);
+        } else {
+            window.alert("Sorry, you have reached your maximum votes for this month :(");
+        }
+    };
+
+    renderVoteSection = (votesRemaining: number): JSX.Element => {
         return (
             <S.VotingOptionsContainer id={'voting-component'}>
                 <S.VotingOptionsTable>
@@ -40,7 +48,7 @@ class Voting extends React.Component<VotingProps, {}> {
                                     >
                                         <S.PlusIconTableData
                                             isEven={index % 2 === 0}
-                                            onClick={() => this.props.onVoteClick(snack)}
+                                            onClick={() => this.onVoteClick(snack, votesRemaining)}
                                         >
                                             <S.PlusIcon
                                                 version="1.1"
@@ -152,7 +160,7 @@ class Voting extends React.Component<VotingProps, {}> {
                     </S.RemainingVotesContainer>
                     {
                         this.props.availableItems && this.props.availableItems.length > 0 ?
-                            this.renderVoteSection() :
+                            this.renderVoteSection(votesRemaining) :
                             this.renderEmptyState()
                     }
                 </S.Content>
