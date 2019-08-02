@@ -1,20 +1,18 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './state/store'
+import LogoIconLayout from './features/LogoIconLayout';
 import Header from './features/Header'
-import IconLayout from './features/IconLayout';
-import SiteBd from './features/SiteBd';
+import MainLayout from './features/MainLayout';
 import Footer from './features/Footer';
-import Snacks from './features/Snacks';
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
       <div className="site">
-        <IconLayout />
+        <LogoIconLayout />
         <Header />
-        <Snacks />
-        <SiteBd />
+        <MainLayout />
         <Footer />
       </div>
     </Provider>

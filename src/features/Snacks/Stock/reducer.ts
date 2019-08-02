@@ -14,7 +14,8 @@ const stockListReducer: Reducer<StockListState> = (state: StockListState = initi
     switch (action.type) {
         case GET_SNACKS_SUCCESS: 
             const actionGetSnacksSuccess = action as GetSnacksSuccessAction;
-            const list = actionGetSnacksSuccess.data;
+            const unsortedList = actionGetSnacksSuccess.data;
+            const list = unsortedList.sort((a, b) => { return b.votes - a.votes });
             return { ...state, list };
         case GET_SNACKS_FAILURE:
             // TODO: Add some error handling here, show that error pop-up

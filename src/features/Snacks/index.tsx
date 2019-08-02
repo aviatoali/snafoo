@@ -4,6 +4,8 @@ import { RootState } from '../../state/types';
 import * as S from './styles';
 import { getSnacks } from './Stock/actions';
 import { postVote } from './Voting/actions';
+import Stock from './Stock';
+import Voting from './Voting';
 
 export interface SnacksProps {
     stock: Snack[];
@@ -27,11 +29,13 @@ class Snacks extends React.Component<SnacksProps, SnacksState> {
     }
 
     render() {
-        console.log('@@@@@@@@@@@@@@@ render this.props: ', this.props);
+        console.log('@@@@@@@@@@@@@@@ Snacks component render this.props: ', this.props);
         return (
-            <S.Container>
-                SNACKS!
-            </S.Container>
+            // TODO: Remove black background color later
+            <div className="site-bd-section" style={{ backgroundColor: 'black' }}>
+                <Stock stock={this.props.stock} />
+                <Voting />
+            </div>
         );
     }
 }
