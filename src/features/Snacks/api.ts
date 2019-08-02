@@ -3,9 +3,8 @@ import { httpMethods } from '../../common/httpMethods';
 import { GetSnacksAction } from './Stock/actions';
 import { PostVoteAction } from './Voting/actions';
 
-// TODO: Does this need updating, can this be hardcoded, should I stick this in env again?
-// const PLATFORM_BASE_URL = `${process.env.REACT_APP_PLATFORM_API_BASE_URL}`;
-const SNACKS_BASE_URL = `${process.env.REACT_APP_SNACKS_API_BASE_URL}`;
+// TODO: Place url in env vars
+const SNACKS_BASE_URL = 'http://localhost:3000';
 
 export const API_SNACKS = {
     snacks: () => `${SNACKS_BASE_URL}/snacks`,

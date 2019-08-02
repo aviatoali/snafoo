@@ -5,6 +5,7 @@ import { VOTES_MAX } from '../../../common/constants';
 
 export interface VotingProps {
     votes: SnackVote[];
+    voteFailed: boolean;
     availableItems: Snack[];
     onVoteClick: (snack: Snack) => void;
 };
@@ -17,7 +18,7 @@ class Voting extends React.Component<VotingProps, {}> {
 
     renderVoteSection = (): JSX.Element => {
         return (
-            <S.VotingOptionsContainer>
+            <S.VotingOptionsContainer id={'voting-component'}>
                 <S.VotingOptionsTable>
                     <tbody>
                         <tr>
@@ -35,10 +36,10 @@ class Voting extends React.Component<VotingProps, {}> {
                                 return (
                                     <S.VotingOptionsTableRow
                                         key={index}
-                                        isEven={index % 2 == 0}
+                                        isEven={index % 2 === 0}
                                     >
-                                        <S.VotingOptionsTableData
-                                            isEven={index % 2 == 0}
+                                        <S.PlusIconTableData
+                                            isEven={index % 2 === 0}
                                             onClick={() => this.props.onVoteClick(snack)}
                                         >
                                             <S.PlusIcon
@@ -57,7 +58,7 @@ class Voting extends React.Component<VotingProps, {}> {
                                                     points="16,6 10,6 10,0 6,0 6,6 0,6 0,10 6,10 6,16 10,16 10,10 16,10 "
                                                 />
                                             </S.PlusIcon>
-                                        </S.VotingOptionsTableData>
+                                        </S.PlusIconTableData>
                                         <S.VotingOptionsTableData>
                                             {`${snack.brand} ${snack.product}`}
                                         </S.VotingOptionsTableData>
@@ -112,10 +113,25 @@ class Voting extends React.Component<VotingProps, {}> {
 
     renderEmptyState = (): JSX.Element => {
         return (
-            <div>
-                EMPTY STATE
-            </div>
+            <SnacksStyles.SectionEmptyState textColor={'#716e70'}>
+                Uh oh! Looks like we're having some trouble getting the votes for the available snacks. Please try back again later!
+            </SnacksStyles.SectionEmptyState>
         );
+    };
+
+    renderSubHeader = (): JSX.Element => {
+        return !this.props.voteFailed ? (
+            <SnacksStyles.SectionSubheader textColor={'#716e70'}>
+                Vote on the snacks you want to see in this month's rotation
+            </SnacksStyles.SectionSubheader>
+        ) : (
+                <SnacksStyles.SectionSubheader
+                    shouldShake={true}
+                    textColor={'#ff0000'}
+                >
+                    Uh oh! Looks like there was an error in casting your vote. Please try recasting your vote later!
+            </SnacksStyles.SectionSubheader>
+            )
     };
 
     render() {
@@ -129,10 +145,7 @@ class Voting extends React.Component<VotingProps, {}> {
                         </SnacksStyles.SectionHeader>
                     </SnacksStyles.SectionHeaderContainer>
                     <SnacksStyles.SectionSubheaderContainer bottomGap={'18px'}>
-                        <SnacksStyles.SectionSubheader
-                            textColor={'#716e70'}>
-                            Vote on the snacks you want to see in this month's rotation
-                        </SnacksStyles.SectionSubheader>
+                        {this.renderSubHeader()}
                     </SnacksStyles.SectionSubheaderContainer>
                     <S.RemainingVotesContainer>
                         {`${votesRemaining} Votes Remaining`}

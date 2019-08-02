@@ -1,20 +1,9 @@
 import React from 'react';
 
-export interface SignUpProps { };
-
-export interface SignUpState { };
-
-class SignUp extends React.Component<SignUpProps, SignUpState> {
-    constructor(props: SignUpProps) {
-        super(props);
-        this.state = {}
-    }
-
-
-    // TODO: This component is a little beefy, maybe I can break it down a little bit later?
+class SignUp extends React.Component<{}, {}> {
     render() {
         return (
-            <div className="site-bd-section site-bd-section_gray">
+            <div className="site-bd-section site-bd-section_gray" id="sign-up-component">
                 <div className="u-constrainer">
                     <div className="layoutPanel">
                         <div className="layoutPanel-hd">

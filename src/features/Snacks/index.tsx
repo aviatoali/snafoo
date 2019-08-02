@@ -11,6 +11,7 @@ export interface SnacksProps {
     stock: Snack[];
     availableItems: Snack[];
     votes: SnackVote[];
+    postVoteFailed: boolean;
     getVotes: () => void;
     getSnacks: () => void;
     postVote: (id: string) => void;
@@ -38,6 +39,7 @@ class Snacks extends React.Component<SnacksProps, {}> {
                 <Voting
                     votes={this.props.votes}
                     availableItems={this.props.availableItems}
+                    voteFailed={this.props.postVoteFailed}
                     onVoteClick={this.handleVoteClick}
                 />
             </div >
@@ -48,7 +50,8 @@ class Snacks extends React.Component<SnacksProps, {}> {
 const mapStateToProps = (state: RootState) => ({
     stock: state.snacks.stock.list,
     availableItems: state.snacks.votes.availableItems,
-    votes: state.snacks.votes.votes
+    votes: state.snacks.votes.votes,
+    postVoteFailed: state.snacks.votes.postVoteFailed
 });
 
 const mapDispatchToProps = (dispatch: Function) => ({

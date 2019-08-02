@@ -1,15 +1,6 @@
 import React from 'react';
 
-export interface HeaderProps { };
-
-export interface HeaderState { };
-
-class Header extends React.Component<HeaderProps, HeaderState> {
-  constructor(props: HeaderProps) {
-    super(props);
-    this.state = {}
-  }
-
+class Header extends React.Component<{}, {}> {
   render() {
     return (
       <header className={"site-hd"}>
@@ -20,10 +11,10 @@ class Header extends React.Component<HeaderProps, HeaderState> {
             </svg>
           </a>
           <nav className="hList">
-            <a className="navLink" href="#">Home</a>
-            <a className="navLink" href="#">Current</a>
-            <a className="navLink" href="#">Voting</a>
-            <a className="navLink" href="#">Sign Up</a>
+            <a className="navLink" href="#home-component">Home</a>
+            <a className="navLink" href="#stock-component">Current</a>
+            <a className="navLink" href="#voting-component">Voting</a>
+            <a className="navLink" href="#sign-up-component">Sign Up</a>
           </nav>
         </div>
       </header>

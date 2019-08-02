@@ -6,17 +6,16 @@ import { GetSnacksSuccessAction } from '../Stock/actions';
 import { LOCAL_STORAGE_KEY } from '../../../common/constants';
 
 export interface VotesState {
-    shouldUpdate: boolean;
     availableItems: Snack[];
-    votes: SnackVote[]
+    votes: SnackVote[];
+    postVoteFailed: boolean;
 };
 
 const initialState = {
-    shouldUpdate: false,
     availableItems: [],
-    votes: []
+    votes: [],
+    postVoteFailed: false,
 };
-// TODO: Go back through here and all reducers and eliminate extraneous states and imports and cases and shit.
 
 const votesReducer: Reducer<VotesState> = (state: VotesState = initialState, action) => {
     switch (action.type) {
@@ -34,11 +33,13 @@ const votesReducer: Reducer<VotesState> = (state: VotesState = initialState, act
                 }
             }
             const updatedVotes = updateLocalStorage(updatedSnack.id);
-            return { ...state, availableItems: itemsList, votes: updatedVotes };
+            return { ...state, availableItems: itemsList, votes: updatedVotes, postVoteFailed: false };
         case POST_VOTE_FAILURE:
             const actionPostVotesFailure = action as PostVoteFailureAction;
             const postVoteError = actionPostVotesFailure.error;
-            return state;
+            // TODO: Replace this and the other service failures with error modal if there is spare time
+            console.log('@@@@@@@@@@ post failed with error: ', postVoteError);
+            return { ...state, postVoteFailed: true };
         case GET_SNACKS_SUCCESS:
             const actionGetSnacksSuccess = action as GetSnacksSuccessAction;
             const unsortedList = actionGetSnacksSuccess.data;

@@ -6,11 +6,9 @@ import { secureHeaders } from './httpHeaders';
 const axios = ax as any;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 const secureRequest = axios.create();
-// const secureRequestToken = axios.create();
 const basicRequest = axios.create();
 
 secureRequest.interceptors.request.use(config => {
-    // config.headers.Authorization = JSON.stringify(SecureHeaders());
     config.headers.Authorization = secureHeaders;
     return config;
 }, error => {
@@ -20,10 +18,6 @@ secureRequest.interceptors.request.use(config => {
 basicRequest.interceptors.response.use(response => {
     return response;
 }, error => {
-
-    // if (error.response && error.response.status === 401) {
-    //     return Promise.reject({ message: 'UNAUTHORIZED', error: error.response });
-    // }
     return Promise.reject({ error });
 });
 
@@ -44,17 +38,6 @@ export interface ApiDefinitionType {
     endWeight?: number;
     contentType?: string;
 };
-
-// const secureRequestWithToken = (token: string) => {
-//     secureRequestToken.interceptors.request.use(
-//         config => {
-//             config.headers.Authorization = JSON.stringify(SecureHeadersWithToken(token));
-//             return config;
-//         },
-//         error => {
-//             return Promise.reject(error);
-//         });
-// };
 
 export default (apiDefinition: ApiDefinitionType) => {
     const headers = new Headers();
@@ -81,16 +64,6 @@ export default (apiDefinition: ApiDefinitionType) => {
         config.data = request.body;
     }
     let requester = basicRequest;
-    // if (apiDefinition.type && apiDefinition.type === 'basic') {
-    //     requester = basicRequest;
-    // } else if (apiDefinition.type && apiDefinition.type === 'customToken') {
-    //     console.log('Enters the custom token section');
-    //     console.log(apiDefinition.body);
-    //     secureRequestWithToken(apiDefinition.body.token);
-    //     requester = secureRequestToken;
-    // } else {
-    //     requester = secureRequest;
-    // }
     if (apiDefinition.type && apiDefinition.type === 'basic') {
         requester = basicRequest;
     } else {
@@ -106,9 +79,6 @@ export default (apiDefinition: ApiDefinitionType) => {
             return response;
         }).catch(error => {
             console.dir(error);
-            // if (error.message === 'UNAUTHORIZED') {
-                // store.dispatch(logoutRequest());
-            // }
             return error;
         });
 };
