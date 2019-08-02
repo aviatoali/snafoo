@@ -1,7 +1,3 @@
-export const sizes = {
-    small: '401px',
-    medium: '801px',
-    large: '1841px'
-};
+export const LOCAL_STORAGE_KEY = 'snackVotes'
 
-// TODO: Prolly delete
+export const VOTES_MAX = 3;

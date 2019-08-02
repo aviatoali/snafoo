@@ -18,9 +18,3 @@ export const SnackCardGrid = styled.div`
         height: 110vh;
     };
 `;
-
-export const Test = styled.div`
-    display:flex;
-    flex-direction: column;
-    height: 100%;
-`;

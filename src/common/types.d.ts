@@ -6,3 +6,8 @@ declare type Snack = {
     image: string;
     votes: number;
 };
+
+declare type SnackVote = {
+    id: string;
+    timestamp: number;
+};

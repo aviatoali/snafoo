@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface SectionContainerProps {
     backgroundImg?: string;
+    maxWidth?: string;
 };
 
 export const SectionContainer = styled.div`
@@ -16,10 +17,15 @@ export const SectionContainer = styled.div`
     @media (min-width: 801px) {
         padding: 40px 45px;
     };
+    ${(props: SectionContainerProps) => props.maxWidth && `
+        max-width: ${props.maxWidth};
+        margin: 0 auto;
+    `};
 `;
 
 interface SectionHeaderProps {
     textColor?: string;
+    bottomGap?: string;
 };
 
 export const SectionHeaderContainer = styled.div`
@@ -39,12 +45,12 @@ export const SectionHeader = styled.h2`
 export const SectionSubheaderContainer = styled.div`
     margin-bottom: 20px;
     @media (min-width: 401px) {
-        margin-bottom: 50px;
+        margin-bottom: ${(props: SectionHeaderProps) => props.bottomGap ? props.bottomGap : '50px'};
     };
 `;
 
 export const SectionSubheader = styled.p`
-    color: #ffffff;
+    color: ${(props: SectionHeaderProps) => props.textColor ? props.textColor : '#ffffff'};
     font-weight: 300;
     line-height: 1.3;
     font-size: 14px;
