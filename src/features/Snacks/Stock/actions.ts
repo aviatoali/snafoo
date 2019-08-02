@@ -1,9 +1,6 @@
 import { Action } from 'redux';
 import * as Actions from './actionTypes';
 
-// TODO: Move this to an inner directory like List if one is created and its needed
-// so that it's at the level where it has the closest relation to the component
-
 // TODO: Fill out all of these, and create type models for response data to assign to action
 // data for each:
 

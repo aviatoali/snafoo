@@ -1,52 +1,58 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../state/types';
-import * as S from './styles';
 import { getSnacks } from './Stock/actions';
-import { postVote } from './Voting/actions';
+import { postVote, getVotes } from './Voting/actions';
 import Stock from './Stock';
 import Voting from './Voting';
+import { VOTES_MAX } from '../../common/constants';
 
 export interface SnacksProps {
     stock: Snack[];
-    votes: string[];
+    availableItems: Snack[];
+    votes: SnackVote[];
+    getVotes: () => void;
     getSnacks: () => void;
     postVote: (id: string) => void;
 };
 
-export interface SnacksState {
-
-};
-
-class Snacks extends React.Component<SnacksProps, SnacksState> {
-    constructor(props: SnacksProps) {
-        super(props);
-        this.state = {};
-    }
-
+class Snacks extends React.Component<SnacksProps, {}> {
     componentDidMount() {
         this.props.getSnacks();
+        this.props.getVotes();
     }
 
+    handleVoteClick = (snack: Snack) => {
+        if (this.props.votes && this.props.votes.length < VOTES_MAX) {
+            const snackIndex = this.props.votes.findIndex(sn => sn.id === snack.id);
+            if (snackIndex === -1) {
+                this.props.postVote(snack.id);
+            }
+        }
+    };
+
     render() {
-        console.log('@@@@@@@@@@@@@@@ Snacks component render this.props: ', this.props);
         return (
-            // TODO: Remove black background color later
-            <div className="site-bd-section" style={{ backgroundColor: 'black' }}>
+            <div className="site-bd-section">
                 <Stock stock={this.props.stock} />
-                <Voting />
-            </div>
+                <Voting
+                    votes={this.props.votes}
+                    availableItems={this.props.availableItems}
+                    onVoteClick={this.handleVoteClick}
+                />
+            </div >
         );
     }
 }
 
 const mapStateToProps = (state: RootState) => ({
     stock: state.snacks.stock.list,
-    votes: state.snacks.votes.list
+    availableItems: state.snacks.votes.availableItems,
+    votes: state.snacks.votes.votes
 });
 
-// TODO: move these out of here later
 const mapDispatchToProps = (dispatch: Function) => ({
+    getVotes: () => { dispatch(getVotes()); },
     getSnacks: () => { dispatch(getSnacks()); },
     postVote: (id: string) => { dispatch(postVote(id)); }
 });
